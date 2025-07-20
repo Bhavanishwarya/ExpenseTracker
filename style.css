@@ -1,101 +1,103 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-  }
-  
-  .container {
-    width: 350px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  h2, h3 {
-    text-align: center;
-  }
-  
-  #balance {
-    font-size: 20px;
-    margin: 10px 0;
-    text-align: center;
-  }
-  
-  .inc-exp-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    background: #f7f7f7;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .money {
-    font-size: 18px;
-    margin-top: 5px;
-  }
-  
-  .plus {
-    color: green;
-  }
-  
-  .minus {
-    color: red;
-  }
-  
-  .list {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  
-  .list li {
-    background-color: #fefefe;
-    padding: 10px;
-    border-right: 5px solid;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-  }
-  
-  .list li.plus {
-    border-color: green;
-  }
-  
-  .list li.minus {
-    border-color: red;
-  }
-  
-  .delete-btn {
-    background: none;
-    border: none;
-    color: red;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  form input, .btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-  }
-  
-  .btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --card: #f4f7f8;
+  --button: #2c7be5;
+  --danger: #ff4d4d;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #ffffff;
+  --card: #1f1f1f;
+  --button: #3d8bfd;
+  --danger: #ff6b6b;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', sans-serif;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1, h2, h3 {
+  margin: 10px 0;
+}
+
+#toggle-theme {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+form select, form input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+
+form button {
+  padding: 10px 20px;
+  background-color: var(--button);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filter-export {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.filter-export{
+  justify-content: center;
+}

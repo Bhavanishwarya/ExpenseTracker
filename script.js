@@ -1,75 +1,69 @@
-const balance = document.getElementById("balance");
-const money_plus = document.getElementById("money-plus");
-const money_minus = document.getElementById("money-minus");
-const list = document.getElementById("list");
-const form = document.getElementById("form");
-const text = document.getElementById("text");
-const amount = document.getElementById("amount");
+const form = document.getElementById("expense-form");
+const categoryInput = document.getElementById("category");
+const amountInput = document.getElementById("amount");
+const noteInput = document.getElementById("note");
+const expenseList = document.getElementById("expense-list");
+const totalDisplay = document.getElementById("total");
+const exportBtn = document.getElementById("export-csv");
+const themeToggle = document.getElementById("toggle-theme");
 
-let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
-function addTransaction(e) {
+function renderExpenses() {
+  expenseList.innerHTML = "";
+  let total = 0;
+
+  expenses.forEach((expense, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${expense.category}</td>
+      <td>₹${expense.amount.toFixed(2)}</td>
+      <td>${expense.note}</td>
+      <td><button class="delete-btn" onclick="deleteExpense(${index})">X</button></td>
+    `;
+    expenseList.appendChild(row);
+    total += expense.amount;
+  });
+
+  totalDisplay.textContent = total.toFixed(2);
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+}
+
+function deleteExpense(index) {
+  expenses.splice(index, 1);
+  renderExpenses();
+}
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
+  const category = categoryInput.value;
+  const amount = parseFloat(amountInput.value);
+  const note = noteInput.value;
 
-  if (text.value.trim() === '' || amount.value.trim() === '') {
-    alert("Please enter a description and amount");
-    return;
-  }
+  if (!category || isNaN(amount)) return;
 
-  const transaction = {
-    id: Date.now(),
-    text: text.value,
-    amount: +amount.value,
-  };
+  expenses.push({ category, amount, note });
+  categoryInput.value = "";
+  amountInput.value = "";
+  noteInput.value = "";
+  renderExpenses();
+});
 
-  transactions.push(transaction);
-  updateLocalStorage();
-  addToList(transaction);
-  updateValues();
+exportBtn.addEventListener("click", () => {
+  const csv = "Category,Amount,Note\n" +
+    expenses.map(e => `${e.category},${e.amount},${e.note}`).join("\n");
 
-  text.value = '';
-  amount.value = '';
-}
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "expenses.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
-function addToList(transaction) {
-  const sign = transaction.amount < 0 ? '-' : '+';
-  const item = document.createElement("li");
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
 
-  item.classList.add(transaction.amount < 0 ? "minus" : "plus");
-  item.innerHTML = `
-    ${transaction.text} 
-    <span>${sign}₹${Math.abs(transaction.amount)}</span>
-    <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
-  `;
-  list.appendChild(item);
-}
-
-function updateValues() {
-  const amounts = transactions.map(t => t.amount);
-  const total = amounts.reduce((acc, val) => acc + val, 0).toFixed(2);
-  const income = amounts.filter(a => a > 0).reduce((acc, val) => acc + val, 0).toFixed(2);
-  const expense = (amounts.filter(a => a < 0).reduce((acc, val) => acc + val, 0) * -1).toFixed(2);
-
-  balance.innerText = `Balance: ₹${total}`;
-  money_plus.innerText = `+₹${income}`;
-  money_minus.innerText = `-₹${expense}`;
-}
-
-function removeTransaction(id) {
-  transactions = transactions.filter(t => t.id !== id);
-  updateLocalStorage();
-  init();
-}
-
-function updateLocalStorage() {
-  localStorage.setItem("transactions", JSON.stringify(transactions));
-}
-
-function init() {
-  list.innerHTML = "";
-  transactions.forEach(addToList);
-  updateValues();
-}
-
-init();
-form.addEventListener("submit", addTransaction);
+renderExpenses();

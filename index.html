@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Expense Tracker</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h2>💰 Expense Tracker</h2>
-    <div id="balance">Balance: ₹0</div>
-
-    <div class="inc-exp-container">
-      <div>
-        <h4>Income</h4>
-        <p id="money-plus" class="money plus">+₹0</p>
-      </div>
-      <div>
-        <h4>Expense</h4>
-        <p id="money-minus" class="money minus">-₹0</p>
-      </div>
+    <div class="header">
+      <h1>💰 Expense Tracker</h1>
+      <button id="toggle-theme">🌙</button>
     </div>
 
-    <h3>History</h3>
-    <ul id="list" class="list"></ul>
+    <div class="balance">
+      <h2>Total Balance: ₹<span id="total">0.00</span></h2>
+    </div>
 
-    <h3>Add New Transaction</h3>
-    <form id="form">
-      <input type="text" id="text" placeholder="Enter description" required />
-      <input type="number" id="amount" placeholder="Enter amount (e.g. -500 or 2000)" required />
-      <button class="btn">Add Transaction</button>
+    <form id="expense-form">
+      <input id="category" placeholder="Category" required/>
+
+      <input type="number" id="amount" placeholder="Amount (₹)" required />
+      <input type="text" id="note" placeholder="Note (optional)" />
+      <button type="submit">Add</button>
     </form>
+
+    <div class="filter-export">
+
+      <button id="export-csv" style="justify-content: center;">⬇️ Export CSV</button>
+    </div>
+
+    
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Note</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody id="expense-list"></tbody>
+    </table>
   </div>
 
   <script src="script.js"></script>
