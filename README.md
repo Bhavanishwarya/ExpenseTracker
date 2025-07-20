@@ -1,26 +1,34 @@
-# 💸 Expense Tracker Website
+# 💰 Expense Tracker
 
-A simple and responsive **Expense Tracker** web application built using **HTML, CSS, and JavaScript**. It helps users track their income and expenses, and view their financial balance in real-time.
+A simple and responsive Expense Tracker web app built with **HTML**, **CSS**, and **JavaScript**. Easily track your expenses, view total balance, and export your data as a CSV file. Clean UI with localStorage-based persistence.
+
 
 ---
 
-## 🚀 Features
+## 🔧 Features
 
-- Add income and expenses
-- Delete transactions
-- Auto-calculates total balance, income, and expense
-- Data persists using **Local Storage**
-- Responsive UI for both mobile and desktop
-
----
-
-
-## 🛠️ Tech Stack
-
-- ✅ **HTML** – Structure
-- 🎨 **CSS** – Styling & responsiveness
-- ⚙️ **JavaScript** – Dynamic data handling and logic
-- 💾 **Local Storage** – To save data in browser
+- ✅ Add expenses with category, amount, and optional note  
+- ✅ View total balance instantly  
+- ✅ Delete individual expenses  
+- ✅ Export your expenses as a CSV file  
+- ✅ Responsive design for mobile and desktop  
+- ✅ Light/Dark mode toggle  
+- ✅ Stores data in localStorage (no backend needed)
 
 ---
 
+## 🛠 Tech Stack
+
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript  
+- **Data Storage**: Browser LocalStorage  
+- **Deployment**: [Vercel](https://vercel.com/)
+
+---
+LIVE DEMO : https://expense-tracker-tau-teal.vercel.app/
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/expense-tracker.git
+   cd expense-tracker
